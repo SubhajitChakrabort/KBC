@@ -1,0 +1,726 @@
+.App {
+  height: 100vh;
+  color: white;
+  background-color: #020230;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: url("https://i.pinimg.com/originals/f1/17/23/f11723f9894882a76ce18a626cc5ad69.jpg")
+    center 0px;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.quiz {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.question {
+  width: 80%;
+  max-width: 800px;
+  background: linear-gradient(#100241, black);
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid white;
+  font-size: 20px;
+  box-sizing: border-box;
+  margin: 10px 0;
+  /* Hexagon shape for question */
+  clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+}
+
+.question {
+  width: 80%;
+  background: linear-gradient(#100241, black);
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid white;
+  font-size: 20px;
+  /* Hexagon shape for question */
+  clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+}
+
+.answers {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.answer {
+  width: calc(50% - 20px);
+  min-width: 250px;
+  padding: 15px;
+  text-align: center;
+  background: linear-gradient(#0e0124, #22074d);
+  border: 1px solid white;
+  border-radius: 65px;
+  font-weight: 300;
+  font-size: 20px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  /* Hexagon shape for answers */
+  clip-path: polygon(15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%, 0% 50%);
+}
+
+.answer:hover,
+.answer.active {
+  background: mediumblue;
+}
+
+.answer.correct {
+  animation: correct 3s ease forwards;
+}
+
+@keyframes correct {
+  0%,
+  22%,
+  42% {
+    background: mediumblue;
+  }
+  20%,
+  40%,
+  60% {
+    background: linear-gradient(#0e0124, #22074d);
+  }
+  62%,
+  100% {
+    background: #33d40f;
+  }
+}
+
+.answer.wrong {
+  animation: wrong 3s ease forwards;
+}
+
+@keyframes wrong {
+  0%,
+  22%,
+  42% {
+    background: mediumblue;
+  }
+  20%,
+  40%,
+  60% {
+    background: linear-gradient(#0e0124, #22074d);
+  }
+  62%,
+  100% {
+    background: red;
+  }
+}
+
+.item {
+  display: inline-block;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 5px;
+  width: 100%;
+  margin: 2px 0;
+  transition: all 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item.active {
+  /* Glow the current playing prize row */
+  background: linear-gradient(#0e0124, #2a0a5a);
+  transform: scale(1.02);
+  border: 2px solid #ffc107;
+  box-shadow: 0 0 12px rgba(255, 193, 7, 0.45), 0 0 20px rgba(255, 193, 7, 0.25);
+  animation: rowGlow 1.6s ease-in-out infinite;
+}
+
+/* Desktop modal prize list: center amounts and make rows full-width */
+.themed-modal-body .prize-increase-list li.item,
+.themed-modal-body .prize-increase-list li.item.prize-increase {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#0e0124, #22074d);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 10px;
+  margin: 6px 0;
+  padding: 10px 12px;
+}
+.themed-modal-body .prize-increase-list li.item .amount {
+  width: 100%;
+  text-align: center;
+}
+/* Glow the stepped-up row inside modal */
+.themed-modal-body .prize-increase-list li.item.prize-increase {
+  border: 2px solid #ffc107;
+  animation: rowGlow 1.6s ease-in-out infinite;
+}
+
+.item.prize-increase {
+  /* Step-up highlight in lists and modals */
+  transform: scale(1.04);
+  border: 2px solid #ffc107;
+  box-shadow: 0 0 14px rgba(255, 193, 7, 0.55), 0 0 24px rgba(255, 193, 7, 0.35);
+  animation: rowGlow 1.6s ease-in-out infinite;
+}
+
+@keyframes prizeIncrease {
+  0% {
+    transform: scale(1);
+    background-color: teal;
+  }
+  50% {
+    transform: scale(1.2);
+    background-color: #ffc107;
+  }
+  100% {
+    transform: scale(1.1);
+    background-color: #ffc107;
+  }
+}
+
+/* Row glow animation for active or step-up items */
+@keyframes rowGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.35), 0 0 18px rgba(255, 193, 7, 0.2);
+    border-color: #ffc107;
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.7), 0 0 30px rgba(255, 193, 7, 0.45);
+    border-color: #ffdf5e;
+  }
+}
+
+.money {
+  background-color: #020230;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  border-left: 2px solid #333;
+  overflow-y: auto;
+}
+
+.money-list {
+  padding: 20px;
+  list-style: none;
+  width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.amount {
+  font-size: 18px;
+  font-weight: 300;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.timer {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 5px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 10px;
+  left: 80px;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.earned {
+  position: relative;
+  margin: auto;
+  margin-top: 150px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.sidebar-info {
+  margin: 10px 0 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border: 1px solid #333;
+}
+
+/* Mobile top info bar */
+.mobile-info-bar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 10px 15px;
+  z-index: 1000;
+  border-bottom: 2px solid #333;
+}
+
+.mobile-info-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 14px;
+}
+
+/* Compact timer when placed in mobile top bar */
+.mobile-top-timer .timer {
+  position: static;
+  display: flex;
+  width: 42px;
+  height: 42px;
+  border-width: 3px;
+  font-size: 16px;
+}
+
+.mobile-info-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.coin-icon {
+  color: #FFD700;
+  font-size: 1.3em;
+  vertical-align: middle;
+  margin-right: 2px;
+  margin-left: 0px;
+  display: inline-block;
+  line-height: 1;
+}
+
+/* Voice Controls */
+.voice-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.voice-controls select {
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 14px;
+}
+
+/* Prize Increase Modal */
+.prize-increase-modal {
+  /* Keep border/radius, background will be provided by themed container below */
+  border: 3px solid #ffc107;
+  border-radius: 15px;
+}
+
+.prize-increase-header {
+  background: linear-gradient(135deg, #ffc107, #ff6b35);
+  color: #000;
+  font-weight: 700;
+}
+
+.prize-increase-body {
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 20px;
+}
+
+.prize-increase-list {
+  max-height: 300px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .App {
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .main {
+    flex-direction: column;
+    padding: 0;
+    height: 70vh;
+    overflow: hidden;
+    background-position: center 0px;
+  }
+  
+  .money-list {
+    padding: 10px;
+  }
+  
+  .quiz {
+    padding: 10px 0;
+    height: 100%;
+    overflow-y: hidden;
+  }
+
+  /* Ensure the timer + question sections fit without pushing answers offscreen */
+  .timer-container { height: 28% !important; }
+  .quiz-container { height: 72% !important; display: flex; flex-direction: column; }
+  
+  .timer {
+    left: 20px;
+    bottom: 10px;
+    width: 60px;
+    height: 60px;
+    font-size: 22px;
+  }
+  
+  .question {
+    font-size: 18px;
+    padding: 8px 10px;
+    width: 96%;
+  }
+  
+  .answers {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    flex: 1 1 auto;
+    align-items: stretch;
+    gap: 10px;
+    padding: 0 15px;
+  }
+  
+  .answer {
+    width: calc(50% - 5px);
+    font-size: 16px;
+    min-width: auto;
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .earned {
+    margin-top: 80px;
+    font-size: 22px;
+  }
+  
+  .money {
+    height: 30vh;
+    overflow-y: auto;
+    background-color: #020230;
+  }
+  
+  .money-list {
+    max-height: 100%;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .App {
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .main {
+    flex-direction: column;
+    padding: 0;
+    height: 60vh;
+    overflow: hidden;
+    background-position: center 0px;
+    /* Push content below fixed mobile info bar */
+    padding-top: 54px;
+  }
+  
+  .quiz {
+    padding: 0 2vw;
+    height: 100%;
+    overflow-y: hidden;
+  }
+  
+  .question {
+    width: 96%;
+    max-width: 96%;
+    font-size: 15px;
+    padding: 6px 8px;
+    margin: 0 auto 4px auto;
+  }
+  
+  .answers {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+    gap: 0;
+  }
+  
+  .answer {
+    width: 100%;
+    max-width: 320px;
+    font-size: 14px;
+    padding: 8px 8px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Reserve vertical space so all 4 options are visible without scroll */
+  .quiz-container { 
+    height: calc(100% - 60px) !important; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+  }
+  /* Collapse the main timer container on mobile and expand quiz */
+  .timer-container { height: 0 !important; min-height: 0 !important; }
+  .quiz-container { height: 100% !important; }
+  /* Hide the in-layout timer; we render it in top bar on mobile */
+  .timer { display: none; }
+  .question { margin: 0 auto 4px auto; }
+  .answers { flex: 0 0 auto; justify-content: flex-start; }
+  
+  .timer {
+    left: 10px;
+    bottom: 10px;
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
+    border-width: 3px;
+  }
+  
+  .money {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 10px;
+    height: 40vh;
+    overflow-y: auto;
+    background-color: #020230;
+  }
+  
+  .money-list {
+    padding: 5px;
+    width: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+  }
+  
+  .item {
+    font-size: 16px;
+    padding: 8px 10px;
+    margin: 6px 0;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+  }
+  
+  .amount {
+    font-size: 15px;
+  }
+  
+  .earned {
+    margin-top: 40px;
+    font-size: 18px;
+  }
+  
+  .sidebar-info {
+    display: none;
+  }
+  
+  .mobile-info-bar {
+    display: block;
+  }
+  
+  .modal-content, .modal-body {
+    padding: 1.2rem !important;
+    font-size: 1rem !important;
+  }
+  
+  .coin-icon {
+    font-size: 1.2em;
+    margin-right: 1px;
+  }
+
+  .voice-controls {
+    top: 5px;
+    right: 5px;
+    gap: 5px;
+  }
+
+  .voice-controls select {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .voice-controls button {
+    font-size: 10px !important;
+    padding: 6px 8px !important;
+  }
+}
+
+/* Themed modal to match prize money section */
+.themed-modal-content {
+  /* Use the same background image as the app with a lighter overlay so the image is visible */
+  background: linear-gradient(rgba(2, 2, 48, 0.35), rgba(16, 2, 65, 0.35)),
+    url("https://i.pinimg.com/originals/f1/17/23/f11723f9894882a76ce18a626cc5ad69.jpg") center 0px / cover no-repeat;
+  border: 2px solid #333;
+  color: #fff;
+}
+.themed-modal-header {
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+}
+.themed-modal-title {
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+.themed-modal-body {
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+}
+.themed-modal-footer {
+  background: rgba(0,0,0,0.8);
+  border-top: 1px solid #333;
+}
+
+/* Deep blue hexagon badge for prize amount, matching answer style */
+.amount {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  color: #fff;
+  background: linear-gradient(#0e0124, #22074d);
+  border: 2px solid #ffffff;
+  clip-path: polygon(15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%, 0% 50%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Reduce badge size on small screens */
+@media (max-width: 600px) {
+  .amount {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-width: 1.5px;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 901px) {
+  .money {
+    min-height: 400px;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+  
+  .money-list {
+    padding: 15px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  
+  /* Desktop: full-width row background, centered amount in sidebar */
+  .money-list .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 6px 0;
+    padding: 10px 12px;
+    background: linear-gradient(#0e0124, #22074d);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 10px;
+  }
+  .money-list .item .amount {
+    width: 100%;
+    text-align: center;
+  }
+
+  .item {
+    padding: 10px 15px;
+    margin: 3px 0;
+    font-size: 16px;
+  }
+  
+  .amount {
+    font-size: 16px;
+  }
+}
+
+/* Win Modal Animations */
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes prizeGlow {
+  0%, 100% {
+    text-shadow: 0 0 5px #ffc107, 0 0 10px #ffc107, 0 0 15px #ffc107;
+  }
+  50% {
+    text-shadow: 0 0 10px #ffc107, 0 0 20px #ffc107, 0 0 30px #ffc107;
+  }
+}
+
+@keyframes coinSpin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.win-modal-content {
+  animation: modalSlideIn 0.5s ease-out;
+}
+
+.prize-amount {
+  animation: prizeGlow 2s ease-in-out infinite;
+}
+
+.coin-spin {
+  animation: coinSpin 2s linear infinite;
+}
