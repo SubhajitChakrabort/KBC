@@ -47,7 +47,7 @@ const Start = ({ setName, setTimeOut }) => {
       style={{
         height: "100vh",
         width: "100%",
-        backgroundImage: "url('https://i.pinimg.com/originals/f1/17/23/f11723f9894882a76ce18a626cc5ad69.jpg')",
+        backgroundImage: "url('/assets/kbc.jpg')",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center 0%",

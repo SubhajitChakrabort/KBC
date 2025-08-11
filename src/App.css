@@ -11,7 +11,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: url("https://i.pinimg.com/originals/f1/17/23/f11723f9894882a76ce18a626cc5ad69.jpg")
+  background: url("/assets/kbc.jpg")
     center 0px;
   height: 100vh;
   background-size: cover;
@@ -596,7 +596,7 @@
 .themed-modal-content {
   /* Use the same background image as the app with a lighter overlay so the image is visible */
   background: linear-gradient(rgba(2, 2, 48, 0.35), rgba(16, 2, 65, 0.35)),
-    url("https://i.pinimg.com/originals/f1/17/23/f11723f9894882a76ce18a626cc5ad69.jpg") center 0px / cover no-repeat;
+    url("/assets/kbc.jpg") center 0px / cover no-repeat;
   border: 2px solid #333;
   color: #fff;
 }
